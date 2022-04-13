@@ -1,8 +1,10 @@
 <?php
-require_once 'config.php';
-
 try {
-    $conn = new PDO ("mysql:host = $servername;dbname=$dbname" , $username,$password);
+    $conn = new PDO(
+        sprintf('mysql:host=%s;port=%s;dbname=%s;charset=utf8', getenv('MYSQL_HOST'), getenv('MYSQL_PORT'), getenv('MYSQL_DATABASE')),
+        getenv('MYSQL_USER'),
+        getenv('MYSQL_PASSWORD')
+    );
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
     /* Создание таблицы */
