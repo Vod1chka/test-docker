@@ -16,8 +16,6 @@ services:
     # nginx должен общаться с php контейнером
     links:
       - php
-    extra_hosts:
-      - "host.docker.internal:host-gateway"
   
   
   php:
@@ -40,6 +38,8 @@ services:
     command: mysqld --default-authentication-plugin=mysql_native_password
     ports:
       - "${MYSQL_PORT}:3306"
+    expose:
+      - '3306'
     volumes:
       - ./mysql:/var/lib/mysql
     # задаем пароль для root пользователя
